@@ -108,7 +108,7 @@ class TestingQueue:
                 self.maxHeapify(node.parent)
 
 
-# run with "python TokenNumber.py" command in PWD
+# run with "python TokenNumber.py" command, make sure to be in PWD
 
 if __name__ == '__main__':
 
