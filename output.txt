@@ -1,0 +1,23 @@
+---- registered Patient --------------- 
+No of patients added: 8
+Refreshed Queue: 
+000499, B
+000390, A
+000060, Surya
+000257, Rishi
+000154, Ajay
+000750, E
+000513, C
+000612, D
+--------------------------------- new Patient entered --------------- 
+Patient Details: John, 55, 000855
+Refreshed Queue: 
+000499, B
+000390, A
+000060, Surya
+000257, Rishi
+000855, John
+000154, Ajay
+000750, E
+000513, C
+000612, D

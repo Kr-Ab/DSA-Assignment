@@ -164,7 +164,8 @@ if __name__ == '__main__':
             f.write("Refreshed Queue: \n")
         
         while (h1.size>0):
-            node = h1.nextPatient()
+            node = PatientRecord()
+            node.copyNode(h1.nextPatient())
             if(node is not None):
                 res = str(node.PatId)+", "+str(node.name)+'\n'
                 f.write(res)    
@@ -180,7 +181,10 @@ if __name__ == '__main__':
         f.write("-----------------------------")
         print(h2.root.age)
         h1.root=h2.root
-        h2.root=None
+        h1.size=h2.size
+        h1.tail=h2.tail
+        h2.root=h2.tail=None
+        h2.size=0
         #for input1b.txt file
         with open("inputPS1b.txt", 'r') as input:  
             for line in input: 
@@ -195,7 +199,8 @@ if __name__ == '__main__':
                         f.write("Patient Details: "+str(patient.name)+", "+str(patient.age)+", "+str(patient.PatId)+"\n")
                         f.write("Refreshed Queue: \n")
                         while (h1.size>0):
-                            node = h1.nextPatient()
+                            node=PatientRecord()
+                            node.copyNode(h1.nextPatient())
                             if(node is not None):
                                 res = str(node.PatId)+", "+str(node.name)+'\n'
                                 f.write(res)    
