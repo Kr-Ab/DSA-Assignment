@@ -1,7 +1,1 @@
 newPatient: John, 55 
-nextPatient: 1
-newPatient: Pradeep, 45
-nextPatient: 2
-nextPatient: 1
-newPatient: Sandeep, 60
-nextPatient: 3

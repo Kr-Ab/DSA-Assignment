@@ -1,4 +1,4 @@
-
+import sys
 class PatientRecord:
     Pid = 0
 
@@ -22,6 +22,11 @@ class PatientRecord:
         self.prevTail = None
         PatientRecord.Pid = PatientRecord.Pid + 1
 
+    def copyNode(self, node):
+        self.PatId=node.PatId
+        self.name=node.name
+        self.age=node.age
+        
 
 class TestingQueue:
 
@@ -110,25 +115,96 @@ class TestingQueue:
 
 # run with "python TokenNumber.py" command, make sure to be in PWD
 
+def isValidInputPatient(inp):
+    if len(inp.split(","))!=2:
+        return "Invalid Input"
+    n,a = inp.split(",")
+    if not all(x.isalpha() or x == " " for x in  n):
+        return "Enter proper name"
+    if not( a.strip().isnumeric() and int(a)<=99 and int(a)>0):
+        return "Enter Valid Age"
+    return True  
+
+def isValidInputnewPatient(inp):
+    if len(inp.split(":"))!=2:
+        return "Invalid Input"
+    newPat = inp.split(":")[1].strip()
+    res = isValidInputPatient(newPat)
+    return res
+      
+
+
 if __name__ == '__main__':
 
-    testingQueue = TestingQueue()
-    pid_init = 0
+    h1 = TestingQueue()
+    h2 = TestingQueue()
+   
+    num_invalid_inputs=0
+    sys.setrecursionlimit(1000000)
 
     try:
-        with open("inputPS1a.txt", 'r') as input:
-            for line in input:
-                name, age = line.strip().split(', ')
-                patient = PatientRecord()
-                patient.registerPatient(name, age)
-                testingQueue.enqueuePatient(patient)
-                pid_init = pid_init + 1
-        while (True):
-            node = testingQueue.nextPatient()
+        with open("inputPS1a.txt", 'r') as input:  
+            for line in input: 
+                
+                if(isValidInputPatient(line.strip())==True):
+                    name, age = line.strip().split(',')
+                    age=int(age.strip())
+                    patient = PatientRecord()
+                    patient.registerPatient(name, age)
+                    print(patient.name)
+                    h1.enqueuePatient(patient)
+                  
+                else:
+                    num_invalid_inputs+=1
+
+        f = open("output.txt", "w")
+        f.write("---- registered Patient --------------- \n")
+        f.write("No of patients added: "+str(h1.size)+"\n")
+        if(h1.size>0):
+            f.write("Refreshed Queue: \n")
+        
+        while (h1.size>0):
+            node = h1.nextPatient()
             if(node is not None):
-                print(node.PatId, node.name)
-                testingQueue._dequeuePatient()
+                res = str(node.PatId)+", "+str(node.name)+'\n'
+                f.write(res)    
+                h1._dequeuePatient() 
+                temp=PatientRecord()
+                temp.copyNode(node)
+                h2.enqueuePatient(temp)   
             else:
                 break
+
+        if (num_invalid_inputs>0):
+            f.write(str(num_invalid_inputs)+" Invalid Input")
+        f.write("-----------------------------")
+        print(h2.root.age)
+        h1.root=h2.root
+        h2.root=None
+        #for input1b.txt file
+        with open("inputPS1b.txt", 'r') as input:  
+            for line in input: 
+                if(line[:10].lower()=="newpatient"):
+                    if(isValidInputnewPatient(line.strip())==True):
+                        name, age = line.strip().split(':')[1].strip().split(",")
+                        age=int(age.strip())
+                        patient = PatientRecord()
+                        patient.registerPatient(name, age)
+                        h1.enqueuePatient(patient)
+                        f.write("---- new Patient entered --------------- \n")
+                        f.write("Patient Details: "+str(patient.name)+", "+str(patient.age)+", "+str(patient.PatId)+"\n")
+                        f.write("Refreshed Queue: \n")
+                        while (h1.size>0):
+                            node = h1.nextPatient()
+                            if(node is not None):
+                                res = str(node.PatId)+", "+str(node.name)+'\n'
+                                f.write(res)    
+                                h1._dequeuePatient()
+                                temp=PatientRecord()
+                                temp.copyNode(node)
+                                h2.enqueuePatient(temp)  
+                            else:
+                                break
+        f.close()
     except Exception as e:
         print("Error", e)

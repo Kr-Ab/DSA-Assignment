@@ -1,7 +1,7 @@
 Surya, 60
 Ajay, 54
 Rishi, 57
-A, 12
+A, 90
 B, 99
 C, 13
 D, 12
