@@ -1,4 +1,4 @@
-import sys
+
 class PatientRecord:
     Pid = 0
 
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     h2 = TestingQueue()
    
     num_invalid_inputs=0
-    sys.setrecursionlimit(1000000)
+    #sys.setrecursionlimit(1000000)
 
     try:
         with open("inputPS1a.txt", 'r') as input:  
