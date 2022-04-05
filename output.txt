@@ -1,42 +1,45 @@
 ---- registered Patient --------------- 
-No of patients added: 8
+No of patients added: 7
 Refreshed Queue: 
-000499, B
-000390, A
+000399, B
 000060, Surya
 000257, Rishi
 000154, Ajay
-000750, E
-000513, C
-000612, D
+000650, E
+000413, C
+000512, D
+--------------------------------- 
+3 Invalid Input 
+A, bca
+z, -99
+samee , 
 ----------------------------- 
 ---- new Patient entered --------------- 
-Patient Details: John, 55, 000855
+Patient Details: John, 55, 000755
 Refreshed Queue: 
-000499, B
-000390, A
+000399, B
 000060, Surya
 000257, Rishi
-000855, John
+000755, John
 000154, Ajay
-000750, E
-000513, C
-000612, D
+000650, E
+000413, C
+000512, D
 ----------------------------- 
---------next Patient: 1--------------- 
-Next Patient for Testing is: 000499, B
+Enter Valid Age : 'newPatient: Sam , 
+' --------next Patient: 1--------------- 
+Next Patient for Testing is: 000399, B
 ----------------------------------------- 
-Check Input 
----- new Patient entered --------------- 
-Patient Details: Abhimanyu, 67, 000967
+Check Input: 'fgsdhqjkdbkew
+' ---- new Patient entered --------------- 
+Patient Details: Abhimanyu, 67, 000867
 Refreshed Queue: 
-000390, A
-000967, Abhimanyu
+000867, Abhimanyu
 000060, Surya
 000257, Rishi
-000855, John
+000755, John
 000154, Ajay
-000750, E
-000513, C
-000612, D
+000650, E
+000413, C
+000512, D
 ----------------------------- 

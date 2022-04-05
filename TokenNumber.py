@@ -117,27 +117,27 @@ class TestingQueue:
 
 def isValidInputPatient(inp):
     if len(inp.split(","))!=2:
-        return "Invalid Input"
+        return "Invalid Input "
     n,a = inp.split(",")
     if not all(x.isalpha() or x == " " for x in  n):
-        return "Enter proper name"
+        return "Enter proper name "
     if not( a.strip().isnumeric() and int(a)<=99 and int(a)>0):
-        return "Enter Valid Age"
+        return "Enter Valid Age "
     return True  
 
 def isValidInputnewPatient(inp):
     if len(inp.split(":"))!=2:
-        return "Invalid Input"
+        return "Invalid Input "
     newPat = inp.split(":")[1].strip()
     res = isValidInputPatient(newPat)
     return res
 
 def isValidInputnextPatient(inp):
     if len(inp.split(":"))!=2:
-        return "Invalid Input"
+        return "Invalid Input "
     numofPat = inp.split(":")[1].strip()
     if not( numofPat.strip().isnumeric() and int(numofPat)>0 ):
-        return "Enter Valid Number of Patients"
+        return "Enter Valid Number of Patients "
     return True    
       
 
@@ -148,6 +148,7 @@ if __name__ == '__main__':
     h2 = TestingQueue()
    
     num_invalid_inputs=0
+    str_invalid_input=[]
     #sys.setrecursionlimit(1000000)
 
     try:
@@ -163,6 +164,7 @@ if __name__ == '__main__':
                     h1.enqueuePatient(patient)
                   
                 else:
+                    str_invalid_input.append(line)
                     num_invalid_inputs+=1
 
         f = open("output.txt", "w")
@@ -185,7 +187,10 @@ if __name__ == '__main__':
                 break
 
         if (num_invalid_inputs>0):
+            f.write("--------------------------------- \n")
             f.write(str(num_invalid_inputs)+" Invalid Input \n")
+            for each in str_invalid_input:
+                f.write(each)
         f.write("----------------------------- \n")
         print(h2.root.age)
         h1.root=h2.root
@@ -226,7 +231,7 @@ if __name__ == '__main__':
                         h2.root=h2.tail=None
                         h2.size=0
                     else:
-                        f.write(str(validation))
+                        f.write(str(validation)+f": '{line}' ")
                 elif(line.strip()[:11].lower()=="nextpatient"):
                     validation=isValidInputnextPatient(line.strip())
                     if(validation==True):
@@ -244,9 +249,9 @@ if __name__ == '__main__':
                                 break
                         f.write("----------------------------------------- \n")
                     else:
-                        f.write(str(validation))
+                        f.write(str(validation)+f": '{line}' ")
                 else:
-                    f.write("Check Input \n")
+                    f.write(f"Check Input: '{line}' ")
 
         f.close()
     except Exception as e:

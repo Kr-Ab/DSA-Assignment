@@ -1,4 +1,5 @@
 newPatient: John, 55 
+newPatient: Sam , 
 nextPatient: 1
 fgsdhqjkdbkew
 newPatient:Abhimanyu,67
