@@ -190,7 +190,6 @@ if __name__ == '__main__':
             for each in str_invalid_input:
                 f.write(each)
         f.write("----------------------------- \n")
-        print(h2.root.age)
         h1.root=h2.root
         h1.size=h2.size
         h1.tail=h2.tail
