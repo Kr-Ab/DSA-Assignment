@@ -131,6 +131,14 @@ def isValidInputnewPatient(inp):
     newPat = inp.split(":")[1].strip()
     res = isValidInputPatient(newPat)
     return res
+
+def isValidInputnextPatient(inp):
+    if len(inp.split(":"))!=2:
+        return "Invalid Input"
+    numofPat = inp.split(":")[1].strip()
+    if not( numofPat.strip().isnumeric() and int(numofPat)>0 ):
+        return "Enter Valid Number of Patients"
+    return True    
       
 
 
@@ -177,8 +185,8 @@ if __name__ == '__main__':
                 break
 
         if (num_invalid_inputs>0):
-            f.write(str(num_invalid_inputs)+" Invalid Input")
-        f.write("-----------------------------")
+            f.write(str(num_invalid_inputs)+" Invalid Input \n")
+        f.write("----------------------------- \n")
         print(h2.root.age)
         h1.root=h2.root
         h1.size=h2.size
@@ -188,16 +196,17 @@ if __name__ == '__main__':
         #for input1b.txt file
         with open("inputPS1b.txt", 'r') as input:  
             for line in input: 
-                if(line[:10].lower()=="newpatient"):
-                    if(isValidInputnewPatient(line.strip())==True):
+                if(line.strip()[:10].lower()=="newpatient"):
+                    validation=isValidInputnewPatient(line.strip())
+                    if(validation==True):
                         name, age = line.strip().split(':')[1].strip().split(",")
                         age=int(age.strip())
                         patient = PatientRecord()
                         patient.registerPatient(name, age)
-                        h1.enqueuePatient(patient)
                         f.write("---- new Patient entered --------------- \n")
                         f.write("Patient Details: "+str(patient.name)+", "+str(patient.age)+", "+str(patient.PatId)+"\n")
                         f.write("Refreshed Queue: \n")
+                        h1.enqueuePatient(patient)
                         while (h1.size>0):
                             node=PatientRecord()
                             node.copyNode(h1.nextPatient())
@@ -210,6 +219,35 @@ if __name__ == '__main__':
                                 h2.enqueuePatient(temp)  
                             else:
                                 break
+                        f.write("----------------------------- \n")
+                        h1.root=h2.root
+                        h1.size=h2.size
+                        h1.tail=h2.tail
+                        h2.root=h2.tail=None
+                        h2.size=0
+                    else:
+                        f.write(str(validation))
+                elif(line.strip()[:11].lower()=="nextpatient"):
+                    validation=isValidInputnextPatient(line.strip())
+                    if(validation==True):
+                        num_of_pat_disp = int(line.strip().split(':')[1].strip())
+                        f.write("--------next Patient: "+str(num_of_pat_disp)+"--------------- \n")
+                        for nopd in range(num_of_pat_disp):
+                            node=PatientRecord()
+                            node.copyNode(h1.nextPatient())
+                            if(node is not None):
+                                res = "Next Patient for Testing is: "+str(node.PatId)+", "+str(node.name)+'\n'
+                                f.write(res)    
+                                h1._dequeuePatient()  
+                            else:
+                                f.write("No more patients left \n")
+                                break
+                        f.write("----------------------------------------- \n")
+                    else:
+                        f.write(str(validation))
+                else:
+                    f.write("Check Input \n")
+
         f.close()
     except Exception as e:
         print("Error", e)

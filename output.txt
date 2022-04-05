@@ -9,7 +9,8 @@ Refreshed Queue:
 000750, E
 000513, C
 000612, D
---------------------------------- new Patient entered --------------- 
+----------------------------- 
+---- new Patient entered --------------- 
 Patient Details: John, 55, 000855
 Refreshed Queue: 
 000499, B
@@ -21,3 +22,21 @@ Refreshed Queue:
 000750, E
 000513, C
 000612, D
+----------------------------- 
+--------next Patient: 1--------------- 
+Next Patient for Testing is: 000499, B
+----------------------------------------- 
+Check Input 
+---- new Patient entered --------------- 
+Patient Details: Abhimanyu, 67, 000967
+Refreshed Queue: 
+000390, A
+000967, Abhimanyu
+000060, Surya
+000257, Rishi
+000855, John
+000154, Ajay
+000750, E
+000513, C
+000612, D
+----------------------------- 
