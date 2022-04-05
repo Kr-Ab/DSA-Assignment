@@ -149,7 +149,6 @@ if __name__ == '__main__':
    
     num_invalid_inputs=0
     str_invalid_input=[]
-    #sys.setrecursionlimit(1000000)
 
     try:
         with open("inputPS1a.txt", 'r') as input:  
@@ -160,7 +159,6 @@ if __name__ == '__main__':
                     age=int(age.strip())
                     patient = PatientRecord()
                     patient.registerPatient(name, age)
-                    print(patient.name)
                     h1.enqueuePatient(patient)
                   
                 else:
@@ -231,13 +229,16 @@ if __name__ == '__main__':
                         h2.root=h2.tail=None
                         h2.size=0
                     else:
-                        f.write(str(validation)+f": '{line}' ")
+                        f.write(str(validation)+f": '{line.strip()}' \n")
+                        f.write("---------------------------- \n")
                 elif(line.strip()[:11].lower()=="nextpatient"):
                     validation=isValidInputnextPatient(line.strip())
                     if(validation==True):
                         num_of_pat_disp = int(line.strip().split(':')[1].strip())
                         f.write("--------next Patient: "+str(num_of_pat_disp)+"--------------- \n")
-                        for nopd in range(num_of_pat_disp):
+                        if(num_of_pat_disp>h1.size):
+                            f.write("Only "+str(h1.size)+ " patients left \n")
+                        for i in range(min(num_of_pat_disp,h1.size)):
                             node=PatientRecord()
                             node.copyNode(h1.nextPatient())
                             if(node is not None):
@@ -245,13 +246,14 @@ if __name__ == '__main__':
                                 f.write(res)    
                                 h1._dequeuePatient()  
                             else:
-                                f.write("No more patients left \n")
                                 break
                         f.write("----------------------------------------- \n")
                     else:
-                        f.write(str(validation)+f": '{line}' ")
+                        f.write(str(validation)+f": '{line.strip()}' \n")
+                        f.write("---------------------------- \n")
                 else:
-                    f.write(f"Check Input: '{line}' ")
+                    f.write(f"Check Input: '{line.strip()}' \n")
+                    f.write("---------------------------- \n")
 
         f.close()
     except Exception as e:

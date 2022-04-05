@@ -3,3 +3,4 @@ newPatient: Sam ,
 nextPatient: 1
 fgsdhqjkdbkew
 newPatient:Abhimanyu,67
+nextPatient: 14

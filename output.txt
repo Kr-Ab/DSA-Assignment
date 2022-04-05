@@ -26,12 +26,14 @@ Refreshed Queue:
 000413, C
 000512, D
 ----------------------------- 
-Enter Valid Age : 'newPatient: Sam , 
-' --------next Patient: 1--------------- 
+Enter Valid Age : 'newPatient: Sam ,' 
+---------------------------- 
+--------next Patient: 1--------------- 
 Next Patient for Testing is: 000399, B
 ----------------------------------------- 
-Check Input: 'fgsdhqjkdbkew
-' ---- new Patient entered --------------- 
+Check Input: 'fgsdhqjkdbkew' 
+---------------------------- 
+---- new Patient entered --------------- 
 Patient Details: Abhimanyu, 67, 000867
 Refreshed Queue: 
 000867, Abhimanyu
@@ -43,3 +45,14 @@ Refreshed Queue:
 000413, C
 000512, D
 ----------------------------- 
+--------next Patient: 14--------------- 
+Only 8patients left 
+Next Patient for Testing is: 000867, Abhimanyu
+Next Patient for Testing is: 000060, Surya
+Next Patient for Testing is: 000257, Rishi
+Next Patient for Testing is: 000755, John
+Next Patient for Testing is: 000154, Ajay
+Next Patient for Testing is: 000650, E
+Next Patient for Testing is: 000413, C
+Next Patient for Testing is: 000512, D
+----------------------------------------- 
