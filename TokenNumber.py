@@ -171,7 +171,7 @@ if __name__ == '__main__':
     str_invalid_input = []
 
     try:
-        f = open("output.txt", "w")
+        f = open("outputPS1.txt", "w")
 
         # reading the initial input file 'inputPS1a.txt'
         with open("inputPS1a.txt", 'r') as input:
