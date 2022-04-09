@@ -1,8 +1,11 @@
 
+from copyreg import constructor
+
+
 class PatientRecord:
     Pid = 0
-
-    def __init__(self):
+    # constructor
+    def __init__(self): 
         self.PatId = ""
         self.name = ""
         self.age = 0
@@ -11,6 +14,7 @@ class PatientRecord:
         self.parent = None
         self.prevTail = None
 
+    # initialise the values of the patient
     def registerPatient(self, name, age):
         self.PatId = str(PatientRecord.Pid).rjust(
             4, '0') + str(age).rjust(2, '0')
@@ -22,6 +26,7 @@ class PatientRecord:
         self.prevTail = None
         PatientRecord.Pid = PatientRecord.Pid + 1
 
+    # copies the values of one node to another (deepcopy)
     def copyNode(self, node):
         self.PatId=node.PatId
         self.name=node.name
@@ -34,11 +39,13 @@ class TestingQueue:
         self.root = None
         self.tail = None
         self.size = 0
-
-    def nextPatient(self):  # returns the root
+        
+    # returns the root
+    def nextPatient(self):  
         return self.root
 
-    def enqueuePatient(self, node):  # insert a node in the heap
+    # insert a node in the heap
+    def enqueuePatient(self, node): 
         if(self.root is None):
             self.root = node
             self.tail = self.root
@@ -55,7 +62,8 @@ class TestingQueue:
             self.tail.prevTail = prevTail
         self.size = self.size + 1
 
-    def _dequeuePatient(self):  # removes the root from heap but doesnt return anything
+    # removes the root from heap but doesnt return anything
+    def _dequeuePatient(self):  
         if self.root is None:
             return
         if self.tail.right:
@@ -76,7 +84,8 @@ class TestingQueue:
                 self.size = self.size + 1
         self.size = self.size - 1
 
-    def setTail(self, node):  # helper
+    # sets and updates the reference of the tail where new node is to be enqueued
+    def setTail(self, node):  
         if(node.parent is None):
             self.tail = node
             while(self.tail.left):
@@ -90,7 +99,8 @@ class TestingQueue:
         elif(node.parent.right is node):
             self.setTail(node.parent)
 
-    def revMaxHeapify(self, node):  # helper
+    # bubbles down the smallest root node while dequeing the heap
+    def revMaxHeapify(self, node):  
         if (node is None or node.left is None):
             return
         max = node.left
@@ -101,12 +111,14 @@ class TestingQueue:
             self.swapNodeData(node, max)
             self.revMaxHeapify(max)
 
-    def swapNodeData(self, a, b):  # helper
+    # swaps the values between two nodes
+    def swapNodeData(self, a, b): 
         a.PatId, b.PatId = b.PatId, a.PatId
         a.name, b.name = b.name, a.name
         a.age, b.age = b.age, a.age
 
-    def maxHeapify(self, node):  # helper
+    # heapifies the binary tree and creates max heap
+    def maxHeapify(self, node):  
         if(node.parent):
             if(node.parent.age < node.age or (node.parent.age == node.age and int(node.parent.PatId) > int(node.PatId))):
                 self.swapNodeData(node.parent, node)
@@ -115,6 +127,7 @@ class TestingQueue:
 
 # run with "python TokenNumber.py" command, make sure to be in PWD
 
+# validates the Input for a Patient
 def isValidInputPatient(inp):
     if len(inp.split(","))!=2:
         return "Invalid Input "
@@ -125,6 +138,7 @@ def isValidInputPatient(inp):
         return "Enter Valid Age "
     return True  
 
+# validates the Input for a New Patient
 def isValidInputnewPatient(inp):
     if len(inp.split(":"))!=2:
         return "Invalid Input "
@@ -132,6 +146,7 @@ def isValidInputnewPatient(inp):
     res = isValidInputPatient(newPat)
     return res
 
+# validates the Input for Next Patient
 def isValidInputnextPatient(inp):
     if len(inp.split(":"))!=2:
         return "Invalid Input "
@@ -142,6 +157,7 @@ def isValidInputnextPatient(inp):
       
 
 
+# main function
 if __name__ == '__main__':
 
     h1 = TestingQueue()
@@ -151,9 +167,10 @@ if __name__ == '__main__':
     str_invalid_input=[]
 
     try:
+        # reading the initial input file 'inputPS1a.txt'
         with open("inputPS1a.txt", 'r') as input:  
             for line in input: 
-                
+                #validating the input
                 if(isValidInputPatient(line.strip())==True):
                     name, age = line.strip().split(',')
                     age=int(age.strip())
@@ -171,6 +188,7 @@ if __name__ == '__main__':
         if(h1.size>0):
             f.write("Refreshed Queue: \n")
         
+        # looping writing the heap to the file
         while (h1.size>0):
             node = PatientRecord()
             node.copyNode(h1.nextPatient())
@@ -195,10 +213,12 @@ if __name__ == '__main__':
         h1.tail=h2.tail
         h2.root=h2.tail=None
         h2.size=0
-        #for input1b.txt file
+
+        # reading the input file 'inputPS1b.txt'
         with open("inputPS1b.txt", 'r') as input:  
             for line in input: 
                 if(line.strip()[:10].lower()=="newpatient"):
+                    #validating the new Patient
                     validation=isValidInputnewPatient(line.strip())
                     if(validation==True):
                         name, age = line.strip().split(':')[1].strip().split(",")
@@ -231,6 +251,7 @@ if __name__ == '__main__':
                         f.write(str(validation)+f": '{line.strip()}' \n")
                         f.write("---------------------------- \n")
                 elif(line.strip()[:11].lower()=="nextpatient"):
+                    #validating the Next Patient
                     validation=isValidInputnextPatient(line.strip())
                     if(validation==True):
                         num_of_pat_disp = int(line.strip().split(':')[1].strip())
@@ -254,6 +275,7 @@ if __name__ == '__main__':
                     f.write(f"Check Input: '{line.strip()}' \n")
                     f.write("---------------------------- \n")
 
+        # closing the file
         f.close()
     except Exception as e:
         print("Error", e)
