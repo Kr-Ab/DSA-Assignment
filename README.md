@@ -1,5 +1,5 @@
 # DSA-Assignment
-Directions to execute :
+### Directions to execute :
 
 Enter the input in the two files - 'inputPS1a.txt' and 'inputPS1b.txt' respectively as per the format described in Design Document.
 Save the input file
